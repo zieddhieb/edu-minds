@@ -1,0 +1,111 @@
+﻿ref;nom;categorie;prix_tnd;prix_source;tp1;tp2;tp3;photo
+CMP001;Résistance 10 Ω;Composants passifs;0,1;estime;yes;no;no;no
+CMP002;Résistance 100 Ω;Composants passifs;0,1;estime;no;no;no;no
+CMP003;Résistance 220 Ω;Composants passifs;0,1;estime;yes;no;yes;no
+CMP004;Résistance 330 Ω;Composants passifs;0,1;estime;no;no;no;no
+CMP005;Résistance 1 kΩ;Composants passifs;0,1;estime;yes;yes;no;no
+CMP006;Résistance 4,7 kΩ;Composants passifs;0,1;estime;no;no;no;no
+CMP007;Résistance 10 kΩ;Composants passifs;0,1;estime;yes;yes;no;no
+CMP008;Résistance 100 kΩ;Composants passifs;0,1;estime;no;no;no;no
+CMP009;Résistance CMS;Composants passifs;9,33;pdf;no;no;no;no
+CMP010;Résistance variable (rhéostat);Composants passifs;8,75;pdf;no;no;no;no
+CMP011;Potentiomètre 10 kΩ;Composants passifs;3,72;pdf;no;yes;no;no
+CMP012;Condensateur céramique 100 nF;Composants passifs;9,42;pdf;no;no;no;no
+CMP013;Condensateur électrolytique 100 µF;Composants passifs;5,7;pdf;no;no;no;no
+CMP014;Condensateur film;Composants passifs;17,16;pdf;no;no;no;no
+CMP015;Condensateur variable;Composants passifs;22,12;pdf;no;no;no;no
+CMP016;Inductance (bobine);Composants passifs;6,32;pdf;no;no;no;no
+CMP017;Transformateur;Composants passifs;15,4;pdf;no;no;no;no
+CMP018;LED rouge;Semi-conducteurs;0,5;pdf;yes;no;yes;no
+CMP019;LED verte;Semi-conducteurs;0,5;estime;no;no;no;no
+CMP020;LED jaune;Semi-conducteurs;0,5;estime;no;no;no;no
+CMP021;LED bleue;Semi-conducteurs;0,5;estime;no;no;no;no
+CMP022;LED blanche;Semi-conducteurs;0,5;estime;no;no;no;no
+CMP023;LED RVB;Semi-conducteurs;12,76;pdf;no;no;no;no
+CMP024;Diode de redressement;Semi-conducteurs;4,13;pdf;no;no;no;no
+CMP025;Diode Zener;Semi-conducteurs;24,39;pdf;no;no;no;no
+CMP026;Diode Schottky;Semi-conducteurs;8,21;pdf;no;no;no;no
+CMP027;Photodiode;Semi-conducteurs;6,8;pdf;no;no;no;no
+CMP028;Phototransistor;Semi-conducteurs;12,78;pdf;no;no;no;no
+CMP029;Optocoupleur;Semi-conducteurs;7,32;pdf;no;no;no;no
+CMP030;Transistor NPN;Semi-conducteurs;16,82;pdf;no;no;no;no
+CMP031;Transistor PNP;Semi-conducteurs;8,59;pdf;no;no;no;no
+CMP032;MOSFET;Semi-conducteurs;12,04;pdf;no;no;no;no
+CMP033;Circuit intégré;Semi-conducteurs;22,57;pdf;no;no;no;no
+CMP034;Timer 555;Semi-conducteurs;13,89;pdf;no;no;no;no
+CMP035;Amplificateur opérationnel;Semi-conducteurs;5,37;pdf;no;no;no;no
+CMP036;Portes logiques;Semi-conducteurs;22,36;pdf;no;no;no;no
+CMP037;Bouton poussoir;Interrupteurs et relais;15,53;pdf;no;no;yes;no
+CMP038;Interrupteur à bascule;Interrupteurs et relais;18,51;pdf;no;no;no;no
+CMP039;Interrupteur à glissière;Interrupteurs et relais;6,47;pdf;yes;no;no;no
+CMP040;Interrupteur DIP;Interrupteurs et relais;0,97;pdf;no;no;no;no
+CMP041;Relais;Interrupteurs et relais;3,29;pdf;no;no;no;no
+CMP042;Moteur DC;Actionneurs;16,62;pdf;no;no;no;no
+CMP043;Servomoteur;Actionneurs;2,86;pdf;no;no;no;no
+CMP044;Moteur pas à pas;Actionneurs;7,8;pdf;no;no;no;no
+CMP045;Buzzer;Actionneurs;6,14;pdf;no;no;no;no
+CMP046;Plaque d’essai (breadboard) 830 points;Prototypage;24,32;pdf;yes;yes;yes;no
+CMP047;Plaque d’essai (breadboard) 400 points;Prototypage;12,0;estime;no;no;no;no
+CMP048;Circuit imprimé (PCB);Prototypage;3,09;pdf;no;no;no;no
+CMP049;Cavalier mâle-mâle;Câbles et connectique;18,47;pdf;yes;yes;yes;no
+CMP050;Cavalier mâle-femelle;Câbles et connectique;6,0;estime;no;no;no;no
+CMP051;Cavalier femelle-femelle;Câbles et connectique;6,0;estime;no;no;no;no
+CMP052;Fil rigide de câblage;Câbles et connectique;24,06;pdf;no;no;yes;no
+CMP053;Cordons banane rouge/noir;Câbles et connectique;15,0;estime;no;no;no;no
+CMP054;Cordons pinces crocodile;Câbles et connectique;8,0;estime;no;no;no;no
+CMP055;Cordons de mesure (pointes de touche);Câbles et connectique;12,0;estime;no;no;no;no
+CMP056;Borniers à vis;Câbles et connectique;22,45;pdf;no;no;no;no
+CMP057;Barrettes à broches;Câbles et connectique;4,49;pdf;no;no;no;no
+CMP058;Connecteurs;Câbles et connectique;13,75;pdf;no;no;no;no
+CMP059;Alimentation DC de laboratoire;Alimentation et protection;429,49;pdf;yes;yes;yes;no
+CMP060;Adaptateur secteur;Alimentation et protection;56,31;pdf;no;no;no;no
+CMP061;Pile AA;Alimentation et protection;2,63;pdf;no;no;no;no
+CMP062;Pile AAA;Alimentation et protection;25,87;pdf;no;no;no;no
+CMP063;Pile 9 V;Alimentation et protection;36,86;pdf;no;no;no;no
+CMP064;Support de piles;Alimentation et protection;5,29;pdf;no;no;no;no
+CMP065;Régulateur de tension 3,3 V;Alimentation et protection;46,03;pdf;no;yes;no;no
+CMP066;Convertisseur DC-DC abaisseur;Alimentation et protection;42,91;pdf;no;no;no;no
+CMP067;Convertisseur DC-DC élévateur;Alimentation et protection;50,74;pdf;no;no;no;no
+CMP068;Fusible 500 mA;Alimentation et protection;0,8;estime;no;no;yes;no
+CMP069;Porte-fusible;Alimentation et protection;2,0;estime;no;no;no;no
+CMP070;Multimètre numérique;Instruments de mesure;206,71;pdf;yes;yes;yes;no
+CMP071;Oscilloscope;Instruments de mesure;446,05;pdf;no;no;no;no
+CMP072;Générateur de fonctions;Instruments de mesure;155,09;pdf;no;no;no;no
+CMP073;Fréquencemètre;Instruments de mesure;371,49;pdf;no;no;no;no
+CMP074;LCR-mètre;Instruments de mesure;75,98;pdf;no;no;no;no
+CMP075;Analyseur logique;Instruments de mesure;198,31;pdf;no;no;no;no
+CMP076;Wattmètre;Instruments de mesure;243,98;pdf;no;no;no;no
+CMP077;Arduino Uno;Microcontrôleurs;156,29;pdf;no;no;no;no
+CMP078;Arduino Mega;Microcontrôleurs;78,62;pdf;no;no;no;no
+CMP079;ESP32;Microcontrôleurs;90,61;pdf;no;no;no;no
+CMP080;Raspberry Pi Pico;Microcontrôleurs;115,27;pdf;no;no;no;no
+CMP081;Raspberry Pi;Microcontrôleurs;173,18;pdf;no;no;no;no
+CMP082;Carte de développement PIC;Microcontrôleurs;136,28;pdf;no;no;no;no
+CMP083;Capteur analogique 3,3 V;Capteurs;8,0;estime;no;yes;no;no
+CMP084;Capteur de température;Capteurs;55,42;pdf;no;no;no;no
+CMP085;Capteur de lumière;Capteurs;39,78;pdf;no;no;no;no
+CMP086;Capteur de mouvement;Capteurs;21,04;pdf;no;no;no;no
+CMP087;Capteur infrarouge;Capteurs;61,13;pdf;no;no;no;no
+CMP088;Capteur ultrason;Capteurs;65,63;pdf;no;no;no;no
+CMP089;Gyroscope;Capteurs;67,54;pdf;no;no;no;no
+CMP090;Accéléromètre;Capteurs;67,15;pdf;no;no;no;no
+CMP091;Capteur de gaz;Capteurs;60,89;pdf;no;no;no;no
+CMP092;Capteur d’humidité;Capteurs;26,0;pdf;no;no;no;no
+CMP093;Capteur magnétique;Capteurs;31,81;pdf;no;no;no;no
+CMP094;Capteur de force;Capteurs;27,91;pdf;no;no;no;no
+CMP095;Tournevis plat;Outils;6,0;estime;no;no;no;no
+CMP096;Tournevis cruciforme (Phillips);Outils;6,0;estime;no;no;no;no
+CMP097;Jeu de tournevis de précision;Outils;18,0;estime;no;no;no;no
+CMP098;Pince à bec fin;Outils;32,0;pdf;no;no;no;no
+CMP099;Pince coupante diagonale;Outils;25,0;estime;no;no;no;no
+CMP100;Pince coupante;Outils;149,78;pdf;no;no;no;no
+CMP101;Pince à dénuder;Outils;38,93;pdf;no;no;no;no
+CMP102;Brucelles antistatiques;Outils;6,0;estime;no;no;no;no
+CMP103;Pied à coulisse numérique;Outils;153,31;pdf;no;no;no;no
+CMP104;Troisième main;Outils;50,84;pdf;no;no;no;no
+CMP105;Lampe loupe;Outils;161,66;pdf;no;no;no;no
+CMP106;Station de soudage;Outils;12,24;pdf;no;no;no;no
+CMP107;Pompe à dessouder;Outils;108,26;pdf;no;no;no;no
+CMP108;Fil à souder;Consommables;15,0;estime;no;no;no;no
+CMP109;Gaine thermorétractable;Consommables;8,0;estime;no;no;no;no
+CMP110;Tresse à dessouder;Consommables;6,0;estime;no;no;no;no

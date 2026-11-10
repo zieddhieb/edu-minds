@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>EduMinds</title>
+  <style>
+    :root { --ink:#fff; --soft:rgba(255,255,255,.72); --accent:#f36f21; --navy:#0b1b3a; }
+    html, body { margin:0; height:100%; background:#08183c; color:var(--ink); font-weight:300;
+      font-family:"Inter Variable",system-ui,-apple-system,"Segoe UI",sans-serif; overflow:hidden; }
+    #cam, #gl { position:fixed; inset:0; width:100%; height:100%; }
+    #cam { object-fit:cover; }
+    #gl { display:none; touch-action:none; } #gl.on { display:block; }
+    .hidden { display:none !important; }
+    /* Liquid-glass look: navy tint + blur of what is behind + light border + soft shadow */
+    .glass { background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.05)),rgba(8,24,60,.34);
+      -webkit-backdrop-filter:blur(18px) saturate(160%); backdrop-filter:blur(18px) saturate(160%);
+      border:1px solid rgba(255,255,255,.38); border-radius:28px;
+      box-shadow:0 10px 40px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.5); }
+    .screen { position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
+      width:min(88vw,420px); padding:26px 28px 28px; box-sizing:border-box; }
+    .logos { display:flex; align-items:center; justify-content:center; gap:14px; margin:0 0 22px; padding:10px 14px;
+      background:rgba(255,255,255,.94); border-radius:16px; }
+    .logos img { display:block; height:36px; width:auto; }
+    .logos i { width:1px; height:30px; background:rgba(8,24,60,.18); }
+    h1 { margin:0 0 6px; font-size:1.9rem; font-weight:300; letter-spacing:-.02em; }
+    p { margin:0 0 20px; color:var(--soft); line-height:1.5; font-size:.95rem; }
+    label { display:block; margin:0 0 14px; font-size:.68rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--soft); }
+    input { display:block; width:100%; box-sizing:border-box; margin-top:7px; padding:13px 14px; font:inherit; font-size:1rem; font-weight:300;
+      letter-spacing:0; text-transform:none; color:var(--ink); background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.3);
+      border-radius:14px; outline:none; }
+    input:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+    input::placeholder { color:rgba(255,255,255,.45); }
+    button { width:100%; padding:14px; font:inherit; font-size:.95rem; font-weight:500; letter-spacing:.03em; color:var(--navy);
+      background:var(--accent); border:0; border-radius:14px; cursor:pointer; }
+    #count { font-size:3.2rem; font-weight:200; margin:2px 0 16px; }
+    #cam-msg { position:fixed; left:50%; bottom:24px; transform:translateX(-50%); padding:12px 18px; font-size:.9rem; width:min(88vw,420px); box-sizing:border-box; }
+  </style>
+</head>
+<body>
+  <video id="cam" autoplay muted playsinline></video>
+  <canvas id="gl"></canvas>
+
+  <section id="login" class="screen glass">
+    <div class="logos"><img src="/logos/enetcom.png" alt="ENET’Com"><i></i><img src="/logos/ieee-enetcom.png" alt="ENET’Com IEEE Student Branch"></div>
+    <h1>EduMinds</h1>
+    <p>Connecte-toi pour commencer tes travaux pratiques.</p>
+    <form id="login-form">
+      <label>Pseudo<input id="nickname" required maxlength="40" autocomplete="off" placeholder="ex. Amine"></label>
+      <label>Classe (facultatif)<input id="class" maxlength="40" autocomplete="off" placeholder="ex. 1ère année"></label>
+      <button type="submit">Continuer</button>
+    </form>
+  </section>
+
+  <section id="handoff" class="screen glass hidden">
+    <h1>Mets le téléphone dans le casque</h1>
+    <p>Les TP s’affichent dans l’espace devant toi.</p>
+    <div id="count">8</div>
+    <button id="ready" type="button">Je suis prêt</button>
+  </section>
+
+  <div id="cam-msg" class="glass hidden">Caméra bloquée : autorise-la dans les réglages du navigateur, puis recharge la page.</div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

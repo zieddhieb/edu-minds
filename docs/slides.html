@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduMinds Glasses Lite — Présentation TSYP 14</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <style>
+    :root {
+      --bg: #08183c;
+      --card-bg: rgba(11, 27, 58, 0.75);
+      --border: rgba(255, 255, 255, 0.18);
+      --accent: #f36f21;
+      --accent-soft: rgba(243, 111, 33, 0.2);
+      --blue: #8cbcd8;
+      --text: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.72);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: radial-gradient(circle at 50% 20%, #102a5c 0%, #08183c 80%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 20px;
+    }
+    .deck-container {
+      width: 100%;
+      max-width: 1080px;
+      aspect-ratio: 16 / 9;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      backdrop-filter: blur(24px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .header {
+      padding: 24px 36px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .header .tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .header .counter {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .slide-body {
+      flex: 1;
+      padding: 32px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow-y: auto;
+    }
+    .slide { display: none; animation: fadeIn 0.3s ease; }
+    .slide.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    h1 { font-size: 2.6rem; font-weight: 600; line-height: 1.2; margin-bottom: 12px; color: #fff; }
+    h2 { font-size: 1.85rem; font-weight: 500; margin-bottom: 20px; color: #fff; }
+    .subtitle { font-size: 1.2rem; color: var(--blue); margin-bottom: 24px; font-weight: 300; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .card h3 { font-size: 1.15rem; color: var(--accent); margin-bottom: 12px; font-weight: 500; }
+    ul { list-style: none; }
+    li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 10px;
+      font-size: 0.98rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+    li strong { color: #fff; font-weight: 500; }
+    li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    th { color: var(--accent); font-weight: 600; }
+    td { color: var(--text-muted); }
+    td:first-child { color: #fff; font-weight: 500; }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 36px;
+      background: rgba(0, 0, 0, 0.25);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 9px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: var(--accent); border-color: var(--accent); color: #0b1b3a; }
+    .btn-notes { background: transparent; border-color: var(--blue); color: var(--blue); }
+    .btn-notes.active { background: var(--blue); color: #08183c; }
+
+    .notes-panel {
+      display: none;
+      background: rgba(8, 24, 60, 0.96);
+      border-top: 1px solid var(--accent);
+      padding: 16px 36px;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: #ffd8bf;
+      max-height: 130px;
+      overflow-y: auto;
+    }
+    .notes-panel.open { display: block; }
+    .notes-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container">
+    <div class="header">
+      <div class="tag" id="slide-tag">AOTN Challenge · TSYP 14</div>
+      <div class="counter" id="slide-counter">1 / 12</div>
+    </div>
+
+    <div class="slide-body">
+      <!-- Slide 1 -->
+      <div class="slide active" data-tag="Introduction" data-notes="Bonjour à tous les membres du jury. Dans le cadre du challenge AOTN sous le thème de l'éducation durable, notre équipe a développé EduMinds Glasses Lite. Aujourd'hui, je vous présente l'application étudiante : une interface immersive, accessible et robuste conçue pour démocratiser les travaux pratiques d'électronique sans risque matériel.">
+        <h1 style="color:var(--accent);">EduMinds Glasses Lite</h1>
+        <p class="subtitle">L'Expérience VR Côté Étudiant · Laboratoires Virtuels Durables</p>
+        <div class="card" style="margin-top: 24px; max-width: 580px;">
+          <ul>
+            <li><strong>Challenge :</strong> AOTN Challenge — TSYP 14 (Thème : Éducation Durable)</li>
+            <li><strong>Présentateur :</strong> Zied Dhieb (1ère année Génie des Données & Systèmes Décisionnels)</li>
+            <li><strong>Institution :</strong> ENET’Com Sfax — IEEE Student Branch</li>
+            <li><strong>Périmètre :</strong> Application Web Réalité Virtuelle, Ergonomie Regard & Flux de Données</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide" data-tag="Problématique" data-notes="Chaque année, les écoles d'ingénieurs font face à un coût important de renouvellement de matériel : les étudiants débutants grillent inévitablement des composants en commettant des erreurs de câblage. Cela engendre des dépenses continues et des déchets électroniques. EduMinds transforme ces erreurs réelles en apprentissages virtuels à coût zéro.">
+        <h2>La Problématique : Coût du Matériel & Déchets Électroniques</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Contraintes dans les Universités</h3>
+            <ul>
+              <li><strong>Équipements onéreux :</strong> Oscilloscopes, alimentations, capteurs coûteux.</li>
+              <li><strong>Taux de casse élevé :</strong> Les débutants grillent des LEDs, capteurs et fusibles.</li>
+              <li><strong>Pratique limitée :</strong> Budgets restreints = moins d'heures de TP par élève.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Impact Écologique & Économique</h3>
+            <ul>
+              <li><strong>Déchets électroniques :</strong> Les composants brûlés sont irrécupérables.</li>
+              <li><strong>Budget de maintenance :</strong> Fonds alloués au remplacement plutôt qu'à l'innovation.</li>
+              <li><strong>Objectif :</strong> Autoriser l'erreur sans pénalité financière.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide" data-tag="Solution & Périmètre" data-notes="Au lieu d'imposer des casques VR à plus de 1000 dollars, notre solution s'appuie sur le smartphone que chaque étudiant possède déjà. Mon rôle a été de concevoir l'intégralité de l'application étudiant : flux vidéo réel, interface 3D sans contact, sélection des TP et collecte des données d'apprentissage.">
+        <h2>Notre Solution & Mon Périmètre de Développement</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Concept Global (Casque Low-Cost)</h3>
+            <ul>
+              <li><strong>Hardware :</strong> Smartphone + coque plastique VR économique.</li>
+              <li><strong>Vidéo Passthrough :</strong> Caméra arrière = vue réelle de la pièce.</li>
+              <li><strong>Kit physique :</strong> Jetons avec marqueurs ArUco + solveur MNA.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Mon Périmètre (L'App Étudiant)</h3>
+            <ul>
+              <li><strong>Arrière-plan vidéo réel :</strong> Caméra plein écran continue.</li>
+              <li><strong>Authentification sans mot de passe :</strong> Profil anonyme instantané.</li>
+              <li><strong>Interface VR Stéréo (Three.js) :</strong> Vue double-œil à 60 FPS.</li>
+              <li><strong>Navigation au regard (Gaze UX) :</strong> 100% mains-libres.</li>
+              <li><strong>Ingestion de données (Supabase) :</strong> File résiliente hors-ligne.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="slide" data-tag="Parcours Étudiant" data-notes="L'ergonomie a été conçue pour la réalité du terrain : l'élève tape son pseudo normalement sur son téléphone. Dès la validation, un compte à rebours de 8 secondes lui laisse le temps de glisser le téléphone dans le casque. Ensuite, la vue bascule en stéréo 3D avec les travaux pratiques flottant directement devant lui.">
+        <h2>Le Parcours Utilisateur (Student Journey)</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>1. Connexion au bureau</h3>
+            <ul>
+              <li>Téléphone en main, carte en verre liquide.</li>
+              <li>Saisie simple du pseudo & classe avec le clavier habituel.</li>
+              <li>Autorisation de la caméra et du gyroscope en un seul clic.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>2. Transition & Immersion</h3>
+            <ul>
+              <li><strong>Compte à rebours de 8 s :</strong> Temps d'insertion dans le casque.</li>
+              <li>Plein écran et verrouillage paysage automatiques.</li>
+              <li><strong>Vue stéréo 3D :</strong> Panneaux flottant à 2,5 mètres devant l'élève.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 16px;">
+          <h3>Les 3 Travaux Pratiques Disponibles</h3>
+          <p style="font-size: 0.95rem; color: var(--text-muted);">
+            <strong>TP 1 :</strong> LED + Résistance (Loi d'Ohm) · 
+            <strong>TP 2 :</strong> Diviseur de tension + Capteur 3,3 V (Protection surtension) · 
+            <strong>TP 3 :</strong> Court-circuit & Fusible
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="slide" data-tag="Ergonomie Regard" data-notes="Dans le casque, l'écran tactile est inaccessible. Nous avons donc créé une navigation 100% au regard : fixer un bouton pendant 1,5 seconde le valide automatiquement avec une jauge orange. Le bouton de sortie exige 2 secondes complètes de fixation pour éviter les sorties accidentelles.">
+        <h2>Navigation Mains-Libres : Le Regard (Dwell Gaze)</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>La Contrainte d'un Casque Fermé</h3>
+            <ul>
+              <li>Le smartphone est enfermé dans la coque : écran tactile intouchable.</li>
+              <li>Pas de manette Bluetooth nécessaire (économie de matériel).</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Mécanisme de Dwell Gaze</h3>
+            <ul>
+              <li><strong>Réticule central :</strong> Anneau indiquant où regarde l'élève.</li>
+              <li><strong>Fixation de 1,5 seconde :</strong> Déclenche l'action sans clic.</li>
+              <li><strong>Jauge orange animée :</strong> Retour visuel immédiat.</li>
+              <li><strong>Sécurité 2,0 secondes :</strong> Sur « Changer de TP » pour éviter les sorties par erreur.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6 -->
+      <div class="slide" data-tag="Boîte à Outils" data-notes="La boîte à outils affiche 3 composants à la fois pour garder une vision claire. Regarder un composant permet de l'ajouter dans la main virtuelle de l'élève avec un compteur. Toutes les données proviennent d'un fichier CSV centralisant 110 composants électroniques réels.">
+        <h2>La Boîte à Outils de Composants (Carrousel)</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Agencement Ergonomique</h3>
+            <ul>
+              <li>Bandeau horizontal fluide à hauteur de regard.</li>
+              <li><strong>3 tuiles visibles à la fois :</strong> Évite la surcharge visuelle en VR.</li>
+              <li>Défilement par balayage tactile, flèches clavier ou futur geste de la main.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Action Directe de Prise (« Take »)</h3>
+            <ul>
+              <li>Fixer une tuile = composant matérialisé dans la main de l'élève.</li>
+              <li>Badge multiplicateur (<strong>×1, ×2</strong>) mis à jour en temps réel.</li>
+              <li>Déclenche le hook pour le moteur de simulation 3D.</li>
+              <li><strong>110 composants réels :</strong> Données chargées depuis <code>components.csv</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7 -->
+      <div class="slide" data-tag="Architecture Technique" data-notes="Pour garantir une réactivité maximale sur mobile, nous avons écarté les frameworks lourds au profit de JavaScript pur et de Three.js. L'effet de verre liquide est dessiné dynamiquement dans des canvas 2D. Cette légèreté assure un rendu fluide et constant à 60 images par seconde.">
+        <h2>Architecture Technique Frontend</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Choix des Technologies</h3>
+            <ul>
+              <li><strong>Vite 5 :</strong> Démarrage instantané, bundle optimisé (715 ko).</li>
+              <li><strong>Vanilla JS (ES Modules) :</strong> Zéro surcoût de framework, 60 FPS garantis.</li>
+              <li><strong>Three.js + StereoEffect :</strong> Projection double œil avec parallaxe naturelle.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Rendu Visuel & Gyroscope</h3>
+            <ul>
+              <li><strong>Textures Canvas 2D :</strong> Panneaux en verre dépoli avec texte vectoriel net.</li>
+              <li><strong>DeviceOrientation API :</strong> Orientation de la tête 3DOF avec repli souris sur PC.</li>
+              <li><strong>Vidéo en arrière-plan :</strong> Flux caméra fluide sans latence.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8 -->
+      <div class="slide" data-tag="Ingénierie des Données" data-notes="En tant qu'étudiant en génie des données, la robustesse du pipeline de collecte était primordiale. Les coupures de réseau étant fréquentes dans les salles de TP, nous avons mis en place une file d'attente locale persistée. Même si la connexion est interrompue, aucun événement n'est perdu.">
+        <h2>Ingénierie des Données : File Résiliente Supabase</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>La Réalité des Réseaux Universitaires</h3>
+            <ul>
+              <li>Connexions Wi-Fi instables avec coupures intermittentes.</li>
+              <li>Un envoi HTTP direct perdrait des données clés lors d'une déconnexion.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>File d'Attente Locale FIFO (Offline-First)</h3>
+            <ul>
+              <li>Événements mis en tampon dans le <code>localStorage</code>.</li>
+              <li><strong>Identifiants UUID :</strong> Les réémissions ne créent aucun doublon en base.</li>
+              <li>Re-tentative automatique toutes les 15 s et au retour du réseau (<code>online</code>).</li>
+              <li>Sécurité RLS (Row Level Security) sur toutes les tables.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9 -->
+      <div class="slide" data-tag="Impact & Métriques" data-notes="Grâce à des vues analytiques dans PostgreSQL, nous quantifions l'impact financier exact d'EduMinds : chaque fausse manipulation est associée au composant qui aurait été détruit pour calculer la somme économisée par l'école. L'erreur devient un indicateur pédagogique précieux.">
+        <h2>Mesure de l'Impact Éducatif & Financier</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Vues SQL Automatisées (PostgreSQL)</h3>
+            <ul>
+              <li><code>failures_prevented</code> : Économies générées en Dinars Tunisiens (TND).</li>
+              <li><code>common_mistakes</code> : Erreurs les plus fréquentes par promotion.</li>
+              <li><code>student_progress</code> : Durée moyenne et progression de chaque étudiant.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Formule de Calcul des Économies</h3>
+            <div style="background: rgba(243,111,33,0.15); border-left: 3px solid var(--accent); padding: 12px; margin-top: 8px; border-radius: 6px;">
+              <strong>Économies (TND) =</strong> Σ (Nombre d'Erreurs × Prix Unitaire Composant)
+            </div>
+            <ul style="margin-top: 12px;">
+              <li>LED grillée sans résistance → CMP018 épargné</li>
+              <li>Surtension capteur 3,3 V → CMP083 épargné</li>
+              <li>Court-circuit franc → Fusible CMP068 épargné</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 10 -->
+      <div class="slide" data-tag="Intégration Équipe" data-notes="Pour travailler efficacement en équipe pluridisciplinaire, notre architecture est strictement découplée. Trois fonctions claires permettent aux équipes Simulation et Vision de brancher leurs moteurs sans modifier l'interface ni la base de données.">
+        <h2>Intégration Inter-Équipes & Modularité (Jalon 14 Nov)</h2>
+        <div class="card">
+          <h3>Les 3 Hooks d'Intégration (<code>src/main.js</code>)</h3>
+          <ul>
+            <li><code>startLab(lab, student)</code> : L'équipe Simulation lance le solveur nodal (MNA).</li>
+            <li><code>takeComponent(lab, comp, count)</code> : L'équipe Vision/Kit instancie le jeton physique.</li>
+            <li><code>stopLab(lab)</code> : Arrête la simulation et clôture la session proprement.</li>
+          </ul>
+        </div>
+        <div class="grid-2" style="margin-top: 16px;">
+          <div class="card">
+            <h3>Vision & Détection ArUco</h3>
+            <p style="font-size:0.9rem; color:var(--text-muted);">Le flux <code>cam.srcObject</code> est partagé directement avec le détecteur de marqueurs.</p>
+          </div>
+          <div class="card">
+            <h3>Contrôle Gestuel (Hand Tracking)</h3>
+            <p style="font-size:0.9rem; color:var(--text-muted);">Prêt pour le geste de la main via les fonctions <code>vr.swipe(1)</code> et <code>vr.swipe(-1)</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 11 -->
+      <div class="slide" data-tag="Choix Techniques" data-notes="Ce tableau récapitule nos arbitrages : chaque décision a été prise pour maximiser la fluidité, réduire les coûts matériels et fiabiliser la collecte des données.">
+        <h2>Synthèse des Décisions Techniques</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Décision</th>
+              <th>Pourquoi ce choix ?</th>
+              <th>Alternative écartée</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Web + Capacitor</td>
+              <td>Base de code unique, test immédiat + APK installable</td>
+              <td>Java/Kotlin natif (trop lourd à itérer)</td>
+            </tr>
+            <tr>
+              <td>Dwell Gaze (1,5 s)</td>
+              <td>Zéro contact physique requis dans la coque</td>
+              <td>Manette Bluetooth (coût matériel en plus)</td>
+            </tr>
+            <tr>
+              <td>File LocalStorage</td>
+              <td>Zéro perte de données en cas de panne Wi-Fi</td>
+              <td>Requêtes directes (perte sèche des logs)</td>
+            </tr>
+            <tr>
+              <td>Source unique CSV</td>
+              <td>Modifiable facilement par l'équipe sur Excel</td>
+              <td>JSON figé dans le code</td>
+            </tr>
+            <tr>
+              <td>Three.js StereoEffect</td>
+              <td>60 FPS légers sur navigateur mobile standard</td>
+              <td>Unity / Unreal WebGL (centaines de Mo)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Slide 12 -->
+      <div class="slide" data-tag="Conclusion & Calendrier" data-notes="EduMinds prouve qu'avec une architecture logicielle moderne, une gestion intelligente des données et un simple smartphone, nous pouvons offrir à chaque étudiant un laboratoire d'électronique durable, économique et sans danger. Merci pour votre attention !">
+        <h2>Conclusion & Feuille de Route</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>État Actuel (100% Validé)</h3>
+            <ul>
+              <li>Compilation et rendu fluide 60 FPS vérifiés.</li>
+              <li>Journalisation Supabase testée avec succès en direct.</li>
+              <li>Les 3 TP configurés avec boîte à outils et sélection regard.</li>
+              <li>Guide d'intégration formalisé pour l'équipe.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Prochaines Échéances Clés</h3>
+            <ul>
+              <li><strong>14 Novembre :</strong> Journée d'intégration Simulation & Vision.</li>
+              <li><strong>21–22 Novembre :</strong> Tests réels avec 8 à 10 étudiants.</li>
+              <li><strong>25 Novembre :</strong> Démonstration finale au challenge AOTN !</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 16px; text-align: center; background: var(--accent-soft); border-color: var(--accent);">
+          <p style="font-size: 1.15rem; font-weight: 500; color: #fff;">
+            EduMinds : Rendre l'apprentissage de l'électronique accessible, interactif et durable.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button class="btn" id="btn-prev" onclick="prevSlide()">❮ Précédent</button>
+      <button class="btn btn-notes" id="btn-notes" onclick="toggleNotes()">Afficher Notes Orateur (N)</button>
+      <button class="btn" id="btn-next" onclick="nextSlide()">Suivant ❯</button>
+    </div>
+
+    <!-- Speaker notes drawer -->
+    <div class="notes-panel" id="notes-panel">
+      <div class="notes-title">Ce que vous devez dire (Notes de présentation) :</div>
+      <div id="notes-content">...</div>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const tagEl = document.getElementById('slide-tag');
+    const counterEl = document.getElementById('slide-counter');
+    const notesPanel = document.getElementById('notes-panel');
+    const notesContent = document.getElementById('notes-content');
+    const btnNotes = document.getElementById('btn-notes');
+    let current = 0;
+
+    function update() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      const s = slides[current];
+      tagEl.textContent = s.dataset.tag ? 'AOTN Challenge · ' + s.dataset.tag : 'AOTN Challenge · TSYP 14';
+      counterEl.textContent = (current + 1) + ' / ' + slides.length;
+      notesContent.textContent = s.dataset.notes || 'Pas de notes pour cette diapositive.';
+    }
+
+    function nextSlide() {
+      if (current < slides.length - 1) { current++; update(); }
+    }
+    function prevSlide() {
+      if (current > 0) { current--; update(); }
+    }
+    function toggleNotes() {
+      notesPanel.classList.toggle('open');
+      btnNotes.classList.toggle('active');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key.toLowerCase() === 'n') toggleNotes();
+      if (e.key.toLowerCase() === 'f') {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+        else document.exitFullscreen().catch(() => {});
+      }
+    });
+
+    update();
+  </script>
+</body>
+</html>
+
